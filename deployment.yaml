@@ -1,0 +1,26 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: falgi-deployment 
+spec: 
+  replicas: 1 
+  selector:
+    matchLabels: 
+      app: falgi
+  template: 
+    metadata: 
+      labels: 
+        app: falgi
+    spec: 
+      containers: 
+        - name: whoami-container
+          image: containous/whoami
+          resources: 
+            limits: 
+              cpu: 500m 
+            requests:
+              cpu: 200m
+      securityContext: 
+        runAsUser: 1000 
+        runAsGroup: 3000
+        fsGroup: 2000
